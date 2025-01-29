@@ -25,7 +25,7 @@ return {
             "__pycache__",
           },
           prompt_prefix = " 🔥 ",
-          selection_caret = " 💥 ",
+          selection_caret = " 🔰 ",
 
           -- 스피너 설정 (내부 작업용)
           spinner = {
@@ -34,6 +34,17 @@ return {
           },
         },
         extensions = {
+          projects = {
+            layout_strategy = "horizontal",
+            layout_config = {
+              width = 0.8,  -- 전체 창의 80%
+              height = 0.8, -- 전체 창의 80%
+              preview_width = 0.6, -- 프리뷰 창이 차지하는 비율
+              prompt_position = "top",
+            },
+            theme = "dropdown", -- dropdown 테마 사용
+            hidden_files = false, -- 숨김 파일 표시 여부
+          },
           noice = {
             -- 기본 테마 수정
             theme = "ivy", -- dropdown, cursor, ivy 중 선택

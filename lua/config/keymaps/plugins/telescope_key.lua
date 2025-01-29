@@ -9,17 +9,47 @@ vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find f
 -- 문자열 검색
 vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live grep" })
 -- 버퍼 목록
-vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
+vim.keymap.set("n", "<leader>fb", function()
+  builtin.buffers({
+    layout_strategy = "vertical", -- 'horizontal', 'center' 등
+    layout_config = {
+      width = 0.4,
+      height = 0.6,
+    },
+    sorting_strategy = "descending",
+    prompt_title = "🌟 Buffers 🌟", -- 커스텀 제목 설정
+  })
+end, { desc = "Telescope buffers" })
 -- 도움말 태그 검색
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help tags" })
 
 vim.keymap.set("n", "<leader>fn", "<Cmd>Telescope noice<CR>", { desc = "Telescope noice messages" })
 
-vim.keymap.set("n", "<leader>fc", "<Cmd>Telescope command_history<Cr>", { desc = "Telescope command history" })
+vim.keymap.set("n", "<leader>fc", function()
+  builtin.command_history({
+    layout_strategy = "vertical", -- 'horizontal', 'center' 등
+    layout_config = {
+      width = 0.4,
+      height = 0.8,
+    },
+    sorting_strategy = "descending",
+    prompt_title = "🌟 Command History 🌟", -- 커스텀 제목 설정
+  })
+end, { desc = "Telescope command history" })
 vim.keymap.set("n", "<leader>fz", "<Cmd>Telescope commands<Cr>", { desc = "Telescope commands" })
 
 -- 최근 열었던 파일
-vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "Recently opened files" })
+vim.keymap.set("n", "<leader>fr", function()
+  builtin.oldfiles({
+    layout_strategy = "vertical", -- 'horizontal', 'center' 등
+    layout_config = {
+      width = 0.4,
+      height = 0.6,
+    },
+    sorting_strategy = "descending",
+    prompt_title = "🌟 Recently 🌟", -- 커스텀 제목 설정
+  })
+end, { desc = "Recently opened files" })
 
 -- 키맵 검색
 vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "Search keymaps" })
@@ -30,6 +60,18 @@ vim.keymap.set("n", "<leader>fd", function()
   require("telescope.builtin").diagnostics({ bufnr = 0 })
 end, { desc = "Diagnostics" })
 
+vim.keymap.set("n", "<leader>fp", function()
+  require("telescope").extensions.projects.projects({
+    layout_strategy = "vertical", -- 'horizontal', 'center' 등
+    layout_config = {
+      width = 0.4,
+      height = 0.6,
+    },
+    sorting_strategy = "descending",
+    prompt_title = "🌟 My Projects 🌟", -- 커스텀 제목 설정
+    previewer = false, -- 미리보기 비활성화
+  })
+end, { noremap = true, silent = true, desc = "Find projects" })
 
 -- 컴프리스트
 vim.keymap.set("n", "<leader>fj", function()
