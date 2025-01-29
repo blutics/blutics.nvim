@@ -163,12 +163,34 @@ return {
       severity_sort = true,     -- 심각도 순으로 정렬
       float = {
         focusable = false,
-        style = "minimal",
+        -- style = "minimal",
         border = "rounded",
         source = "always",
         header = "",
         prefix = "",
       },
     })
+    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+      vim.lsp.handlers.hover, {
+        border = "rounded", -- 테두리 스타일 설정
+        -- 다른 border 옵션들: "none", "single", "double", "rounded", "solid", "shadow"
+
+        -- 창 크기와 여백 설정 (선택사항)
+        max_width = 80,
+        max_height = 20,
+        -- 각 방향의 여백 설정
+        padding = { top = 1, left = 2, bottom = 1, right = 2 },
+      }
+    )
+
+    -- 추가로 signature help 창도 같은 스타일로 설정하고 싶다면:
+    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+      vim.lsp.handlers.signature_help, {
+        border = "rounded",
+        max_width = 80,
+        max_height = 20,
+        padding = { top = 1, left = 2, bottom = 1, right = 2 },
+      }
+    )
   end,
 }

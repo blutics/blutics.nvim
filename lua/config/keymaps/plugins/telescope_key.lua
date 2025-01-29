@@ -70,6 +70,7 @@ vim.keymap.set("n", "<leader>fp", function()
     sorting_strategy = "descending",
     prompt_title = "🌟 My Projects 🌟", -- 커스텀 제목 설정
     previewer = false, -- 미리보기 비활성화
+    -- winblend = 15, -- 창 투명도 조정
   })
 end, { noremap = true, silent = true, desc = "Find projects" })
 
