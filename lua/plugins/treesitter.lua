@@ -31,6 +31,7 @@ return {
           "css",
           "json",
           "lua",
+          "markdown", "markdown_inline"
           -- 필요하다면 "css", "json", "lua" 등도 추가
         },
         -- treesitter 하이라이팅 기능

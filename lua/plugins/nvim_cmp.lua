@@ -2,12 +2,12 @@ return {
   "hrsh7th/nvim-cmp",
   event = "InsertEnter",
   dependencies = {
-    "hrsh7th/cmp-nvim-lsp",     -- LSP completion
-    "hrsh7th/cmp-nvim-lua",     -- Lua completion
-    "hrsh7th/cmp-buffer",       -- buffer completion
-    "hrsh7th/cmp-path",         -- path completion
+    "hrsh7th/cmp-nvim-lsp",   -- LSP completion
+    "hrsh7th/cmp-nvim-lua",   -- Lua completion
+    "hrsh7th/cmp-buffer",     -- buffer completion
+    "hrsh7th/cmp-path",       -- path completion
     "saadparwaiz1/cmp_luasnip", -- snippet completion
-    "L3MON4D3/LuaSnip",         -- snippet engine
+    "L3MON4D3/LuaSnip",       -- snippet engine
   },
   config = function()
     print("nvim-cmp config started!")
@@ -66,6 +66,7 @@ return {
         end, { "i", "s" }),
       }),
       sources = {
+        { name = "obsidian" },
         { name = "nvim_lsp" },
         { name = "nvim_lua" },
         { name = "luasnip" },
@@ -104,7 +105,7 @@ return {
           }
 
           -- 아이콘과 텍스트 결합
-          vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
+          vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
 
           -- 소스 표시
           vim_item.menu = ({

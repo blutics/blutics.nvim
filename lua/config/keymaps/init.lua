@@ -6,6 +6,7 @@ require("config.keymaps.plugins.lsp_key")
 require("config.keymaps.plugins.window_key")
 require("config.keymaps.plugins.tab_key")
 require("config.keymaps.plugins.neotest_key")
+require("config.keymaps.plugins.obsidian_key")
 -- Fterm
 
 -- FTerm을 열고 닫는 단축키 매핑
