@@ -23,3 +23,4 @@ local powershell_options = {
 -- end
 
 require("config.after.options")
+

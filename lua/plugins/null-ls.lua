@@ -13,6 +13,7 @@ return {
         "black", -- 포매터
         "isort", -- import 정렬
         "ruff", -- 린터
+        "mypy",
         "rope",
         "yamllint",
         "prettier",

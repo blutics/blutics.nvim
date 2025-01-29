@@ -26,6 +26,10 @@ vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "Search keymaps" })
 
 vim.keymap.set("n", "<leader>ft", "<Cmd>Telescope telescope-tabs list_tabs<Cr>", { desc = "Tabs" })
 
+vim.keymap.set("n", "<leader>fd", function()
+  require("telescope.builtin").diagnostics({ bufnr = 0 })
+end, { desc = "Diagnostics" })
+
 
 -- 컴프리스트
 vim.keymap.set("n", "<leader>fj", function()
