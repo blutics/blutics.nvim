@@ -71,6 +71,3 @@ vim.keymap.set("n", "<leader>byt", aaat.modify_tags, { desc = "Append Yaml Tags"
 
 -- aliases를 검색하는 함수
 
-local custom_obsidian = require("custom.obsidian_custom")
--- 키매핑 설정
-vim.keymap.set("n", "<leader>ba", custom_obsidian.search_by_aliases, { desc = "Find by aliases" })
