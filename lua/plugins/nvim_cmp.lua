@@ -10,10 +10,8 @@ return {
     "L3MON4D3/LuaSnip",       -- snippet engine
   },
   config = function()
-    print("nvim-cmp config started!")
     local cmp = require("cmp")
     local luasnip = require("luasnip")
-    print("loaded!!!! nvim-cmp!")
 
     cmp.setup({
       snippet = {
@@ -42,7 +40,6 @@ return {
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-Space>"] = cmp.mapping.complete(),
         ["<C-e>"] = cmp.mapping.close(),
-        ["<Esc>"] = cmp.mapping.close(),
         ["<CR>"] = cmp.mapping.confirm({
           behavior = cmp.ConfirmBehavior.Replace,
           select = true,

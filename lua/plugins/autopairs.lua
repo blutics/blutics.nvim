@@ -2,18 +2,19 @@ return {
   {
     "windwp/nvim-ts-autotag",
     dependencies = "nvim-treesitter/nvim-treesitter",
-    config = function()
-      require('nvim-ts-autotag').setup({
-        enable = true,
-        enable_rename = true,
-        enable_close = true,
-        enable_close_on_slash = true,
-        filetypes = {
+    opts = {
+      enable = true,
+      filetypes = {
           'html', 'xml', 'javascript', 'javascriptreact',
           'typescriptreact', 'svelte', 'vue', 'tsx', 'jsx',
           'rescript', 'php', 'markdown'
-        },
-      })
+      },
+      enable_rename = true,
+      enable_close = true,
+      enable_close_on_slash = true,
+    },
+    config = function(_, opts)
+      require('nvim-ts-autotag').setup(opts)
     end,
   },     -- HTML 태그 자동 닫기
   {

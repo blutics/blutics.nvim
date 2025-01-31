@@ -6,8 +6,7 @@
 local keymap_utils = require("config.keymaps.utils")
 -- 키매핑 설정
 local mainChar = "s"
-local aa = keymap_utils.make_leader_keymap_string(mainChar, "")
-print("===>", aa)
+
 vim.keymap.set("n", keymap_utils.make_leader_keymap_string(mainChar, ""), "", { desc = "Overseer" })
 vim.keymap.set("n", keymap_utils.make_leader_keymap_string(mainChar, "o"), ":OverseerOpen<CR>")
 vim.keymap.set("n", keymap_utils.make_leader_keymap_string(mainChar, "t"), ":OverseerToggle<CR>")

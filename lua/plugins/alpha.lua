@@ -79,12 +79,7 @@ return {
         { type = "padding", val = 5 },
         dashboard.section.footer,
       }
-      vim.keymap.set(
-        "n",
-        "<leader><leader>h",
-        ":Alpha<CR>",
-        { noremap = true, silent = true, desc = "Alpha Dashboard" }
-      )
+      
       -- Alpha 설정 적용
       alpha.setup(dashboard.config)
     end,
