@@ -30,6 +30,7 @@ return {
           "html",
           "css",
           "json",
+          "yaml",
           "lua",
           "markdown", "markdown_inline"
           -- 필요하다면 "css", "json", "lua" 등도 추가

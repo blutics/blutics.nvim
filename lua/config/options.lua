@@ -15,9 +15,9 @@ vim.opt.softtabstop = indentDepth -- 편집할 때 탭 크기
 vim.opt.wrap = false              -- 긴 줄 줄바꿈 비활성화
 
 -- 기본 인코딩 설정
-vim.opt.encoding = 'utf-8'
-vim.opt.fileencoding = 'utf-8'
-vim.scriptencoding = 'utf-8'
+vim.opt.encoding = "utf-8"
+vim.opt.fileencoding = "utf-8"
+vim.scriptencoding = "utf-8"
 
 -- 라인 넘버 표시
 vim.opt.number = true
@@ -32,13 +32,34 @@ vim.opt.cursorline = true    -- 현재 라인 하이라이트
 vim.opt.signcolumn = "yes"   -- 사인 컬럼 표시 (git 변경사항 등)
 vim.opt.showmatch = true     -- 괄호 매칭 보여주기
 
-
-
 -- 스플릿 설정
 vim.opt.splitbelow = true -- 수평 분할 시 아래로
 vim.opt.splitright = true -- 수직 분할 시 오른쪽으로
 
-
-
 -- 현재 라인 하이라이트 활성화
 vim.opt.cursorline = true
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "yaml", "yml", "markdown" },
+  callback = function()
+    vim.opt_local.tabstop = 2
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.expandtab = true
+    vim.opt_local.softtabstop = 2
+  end,
+})
+
+-- init.lua 또는 다른 설정 파일에 추가
+vim.api.nvim_create_autocmd("VimLeavePre", {
+  callback = function()
+    -- 모든 LSP 클라이언트 종료
+    vim.lsp.stop_client(vim.lsp.get_active_clients())
+
+    -- 추가적인 백그라운드 작업 종료
+    vim.cmd([[
+      silent! wa  -- 모든 버퍼 저장
+      silent! qa! -- 강제 종료
+    ]])
+  end,
+  group = vim.api.nvim_create_augroup("CleanupOnExit", { clear = true }),
+})

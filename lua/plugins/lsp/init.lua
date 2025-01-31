@@ -134,6 +134,10 @@ return {
     lspconfig.yamlls.setup({
       settings = {
         yaml = {
+          -- editor = {
+          --   tabSize = 4,
+          --   insertSpaces = false,
+          -- },
           format = {
             enable = true,         -- 포맷팅 활성화
             singleQuote = true,    -- 작은따옴표 사용
@@ -142,14 +146,9 @@ return {
           validate = true,         -- 실시간 유효성 검사
           completion = true,       -- 자동 완성
           hover = true,            -- 호버 정보 표시
-          schemas = {
-            -- kubernetes 스키마 예시
-            ["https://raw.githubusercontent.com/kubernetes/kubernetes/master/api/openapi-spec/swagger.json"] =
-            "/*.k8s.yaml",
-            -- docker-compose 스키마 예시
-            ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] =
-            "docker-compose*.yml",
-          }
+          -- schemas = {
+          --   ["https://json.schemastore.org/markdownlint"] = "/*.md",
+          -- }
         }
       }
     })

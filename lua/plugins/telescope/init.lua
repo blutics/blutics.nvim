@@ -25,7 +25,7 @@ return {
             "__pycache__",
           },
           prompt_prefix = " 🔥 ",
-          selection_caret = " 🔰 ",
+          selection_caret = "» ",
 
           -- 스피너 설정 (내부 작업용)
           spinner = {

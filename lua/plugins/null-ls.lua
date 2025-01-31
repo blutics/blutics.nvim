@@ -2,7 +2,7 @@ return {
   "jose-elias-alvarez/null-ls.nvim",
   dependencies = {
     "nvim-lua/plenary.nvim", -- null-ls 실행에 필요한 라이브러리
-    "jay-babu/mason-null-ls.nvim"
+    "jay-babu/mason-null-ls.nvim",
   },
   config = function()
     -- null-ls에서 사용할 포매터, 린터, 코드액션 등 등록
@@ -27,8 +27,16 @@ return {
     local sources = {
       -- Formatting
       null_ls.builtins.formatting.prettier.with({
-        extra_filetypes = { "svelte", "astro", "yaml", "yml" }, -- 필요하다면 추가 확장
-        extra_args = { "--single-quote", "--no-semi" },
+        extra_filetypes = { "svelte", "astro", "yaml", "yml", "markdown" }, -- 필요하다면 추가 확장
+        extra_args = {
+          "--single-quote",
+          "--no-semi",
+          "--use-tabs", -- 탭 사용
+          "--tab-width",
+          "2",     -- 탭 크기
+          "--yaml-parser",
+          "yaml",  -- YAML 파서 명시적 지정
+        },
       }),
 
       -- YAML 린터
@@ -36,8 +44,8 @@ return {
         -- yamllint 설정 커스터마이징
         extra_args = {
           "-d",
-          "{extends: default, rules: {line-length: {max: 120}}}"
-        }
+          "{extends: default, rules: {line-length: {max: 120}}}",
+        },
       }),
 
       -- null_ls.builtins.formatting.black, -- Python
@@ -76,8 +84,7 @@ return {
     null_ls.setup({
       sources = sources,
       root_dir = function(fname)
-        return vim.fn.finddir('.git', fname .. ';') or
-            vim.fn.findfile('pyproject.toml', fname .. ';')
+        return vim.fn.finddir(".git", fname .. ";") or vim.fn.findfile("pyproject.toml", fname .. ";")
       end,
       on_attach = function(client, bufnr)
         -- 포매팅 단축키 예시
