@@ -7,3 +7,4 @@ ls.config.set_config({
 
 require("snippets.common")
 require("snippets.languages.vim_lua")
+require("snippets.languages.markdown")

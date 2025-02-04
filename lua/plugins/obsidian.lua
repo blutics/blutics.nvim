@@ -3,50 +3,32 @@ return {
   version = "*", -- recommended, use latest release instead of latest commit
   lazy = false,
   ft = "markdown",
-  -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
-  -- event = {
-  --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-  --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
-  --   -- refer to `:h file-pattern` for more examples
-  --   "BufReadPre path/to/my-vault/*.md",
-  --   "BufNewFile path/to/my-vault/*.md",
-  -- },
   dependencies = {
-    -- Required.
     "nvim-lua/plenary.nvim",
-
-    -- see below for full list of optional dependencies 👇
   },
-  note_frontmatter_fmt = function(note)
-    -- 현재 시간 포맷팅
-    local current_time = os.date("%Y-%m-%d %H:%M")
-
-    -- 새 노트 생성시
-    if not note.metadata or not note.metadata.created then
-      return {
-        id = note.id,
-        aliases = note.aliases,
-        tags = note.tags,
-        created = current_time, -- 생성 시간 설정
-        updated = current_time, -- 처음에는 생성 시간과 동일
-      }
-    end
-
-    -- 기존 노트 업데이트시
-    return {
-      id = note.id,
-      aliases = note.aliases,
-      tags = note.tags,
-      created = note.metadata.created, -- 기존 생성 시간 유지
-      updated = current_time,       -- 현재 시간으로 업데이트
-    }
-  end,
   opts = {
+    ui = { enable = false },
+    note_id_func = function(title)
+      -- 타임스탬프 생성: YYMMDDHHMMSS.sss
+      local timestamp = tostring(os.time())
+      -- 4자리 알파벳 대문자 해시 생성
+      local chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      local hash = ""
+      for i = 1, 4 do
+        local random_index = math.random(1, #chars)
+        hash = hash .. string.sub(chars, random_index, random_index)
+      end
+
+      if title ~= nil and title ~= "" then
+        -- 한글 허용 버전
+        local cleaned_title = title:gsub("%s+", "_"):gsub("[^%w_ㄱ-ㅎ가-힣]", "")
+        return string.format("%s-%s-%s", timestamp, hash, cleaned_title)
+      else
+        return string.format("%s-%s", timestamp, hash)
+      end
+    end,
     templates = {
       folder = "templates",
-      -- date_format = "%Y-%m-%d",
-      -- time_format = "%H:%M",
-      -- A map for custom variables, the key should be the variable and the value a function
       substitutions = {
         -- aliases = "\n  - "
       },
@@ -64,6 +46,15 @@ return {
         name = "tech",
         path = "/mnt/d/obsidian/tech_vault/",
       },
+    },
+
+    notes_subdir = "notes/inbox",
+    daily_notes = {
+      folder = "notes/dailies",
+      date_format = "%Y-%m-%d",
+      alias_format = "%B %-d, %Y",
+      default_tags = { "daily-notes" },
+      template = nil,
     },
     completion = {
       nvim_cmp = true,

@@ -13,6 +13,7 @@ return {
 				"package.json",
 				"requirements.txt",
         ".obsidian",
+        "README.md"
 			},
 
 			-- 프로젝트가 감지되면 해당 디렉토리로 자동 변경

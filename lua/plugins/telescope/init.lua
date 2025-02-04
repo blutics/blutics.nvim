@@ -1,4 +1,27 @@
 -- ~/.config/nvim/lua/plugins.lua 등 lazy.nvim 설정 파일에서:
+local buffer_delete_force = function(prompt_bufnr)
+  local actions = require("telescope.actions")
+  local action_state = require("telescope.actions.state")
+  local current_picker = action_state.get_current_picker(prompt_bufnr)
+  local multi_selections = current_picker:get_multi_selection()
+
+  if next(multi_selections) then
+    for _, selection in ipairs(multi_selections) do
+      vim.api.nvim_buf_delete(selection.bufnr, { force = true })
+    end
+  else
+    local selection = action_state.get_selected_entry()
+    vim.api.nvim_buf_delete(selection.bufnr, { force = true })
+  end
+  -- Telescope 창 닫기
+  actions.close(prompt_bufnr)
+
+  -- 버퍼 목록 다시 열기
+  vim.schedule(function()
+    local tc = require("custom.telescope_custom")
+    tc.custom_telescope_buffer()
+  end)
+end
 
 return {
   {
@@ -19,6 +42,19 @@ return {
       local actions = require("telescope.actions")
 
       telescope.setup({
+        pickers = {
+          buffers = {
+            mappings = {
+              i = {
+                ["<C-d>"] = buffer_delete_force,
+              },
+
+              n = {
+                ["<C-d>"] = buffer_delete_force,
+              },
+            },
+          },
+        },
         defaults = {
           file_ignore_patterns = {
             "node_modules/",
@@ -32,6 +68,12 @@ return {
             frames = { "⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷" },
             interval = 80,
           },
+          mappings = {
+            n = {
+              ["<Tab>"] = actions.toggle_selection,
+            }
+
+          }
         },
         extensions = {
           projects = {
@@ -108,3 +150,5 @@ return {
     dependencies = { "nvim-telescope/telescope.nvim" },
   },
 }
+
+-- Telescope.Import
