@@ -32,7 +32,7 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       { "ahmedkhalf/project.nvim" },
-      { "nvim-telescope/telescope-fzf-native.nvim",  run = "make" },
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make", cond = function() return vim.fn.executable("make") == 1 end, },
       { "nvim-telescope/telescope-file-browser.nvim" },
       { "nvim-tree/nvim-web-devicons" },
       { "folke/trouble.nvim" },
@@ -134,7 +134,7 @@ return {
         },
       })
 
-      telescope.load_extension("fzf")
+      -- telescope.load_extension("fzf")telescope
       telescope.load_extension("projects")
       -- telescope.load_extension("noice")
     end,

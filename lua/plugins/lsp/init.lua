@@ -18,7 +18,8 @@ return {
         "yamlls",
         -- "pylsp",
       },
-      automatic_installation = true,
+      automatic_enable = false,
+      -- automatic_installation = true,
     })
 
     -- LSP 기능 설정
