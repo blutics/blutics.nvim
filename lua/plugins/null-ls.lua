@@ -19,6 +19,7 @@ return {
         "prettier",
         "stylua",
         "eslint",
+        "alejandra", -- nix formatter
         -- 필요하다면 "mypy" 등도 추가 가능 (CLI가 존재하는 도구)
       },
       automatic_installation = true,
